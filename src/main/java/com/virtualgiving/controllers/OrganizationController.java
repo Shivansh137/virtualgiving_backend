@@ -2,7 +2,9 @@ package com.virtualgiving.controllers;
 
 import com.virtualgiving.entities.OrganizationEntity;
 import com.virtualgiving.services.OrganizationService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/organizations")
 public class OrganizationController {
-    private final OrganizationService organizationService;
 
     @Autowired
+    private final OrganizationService organizationService;
+
     public OrganizationController(OrganizationService organizationService){
         this.organizationService = organizationService;
     }
