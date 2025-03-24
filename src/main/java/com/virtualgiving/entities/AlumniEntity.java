@@ -1,5 +1,7 @@
 package com.virtualgiving.entities;
 
+import java.util.List;
+
 import com.virtualgiving.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -10,14 +12,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "admins")
-public class AdminEntity {
+@Table(name = "alumni")
+public class AlumniEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,27 +33,27 @@ public class AdminEntity {
     @Email(message = "Invalid Email format")
     private String email;
 
+    @Column(name = "contact_numbers")
+    @ElementCollection
+    private List<String> contactNumbers;
+
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
+    @NotBlank(message = "Password cannot be blank")
+    private String password;
+
+    @NotBlank(message = "Street cannot be blank")
+    private String street;
+
     @NotBlank(message = "City cannot be blank")
     private String city;
 
     @NotBlank(message = "State cannot be blank")
     private String state;
 
-    @NotBlank(message = "Street cannot be blank")
-    private String street;
-
-    @NotBlank(message = "Password cannot be blank")
-    private String password;
-
-    @Column(name = "profile_picture")
-    private String profilePicture;
-
     @NotNull(message = "Role is a required field")
     @Enumerated(EnumType.STRING)
-    private Role role = Role.ADMIN;
-
-    @Column(name = "contact_numbers")
-    @ElementCollection
-    private List<String> contactNumbers;
+    private Role role = Role.ALUMNI;
 
 }

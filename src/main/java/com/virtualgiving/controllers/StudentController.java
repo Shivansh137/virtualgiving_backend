@@ -1,26 +1,21 @@
 package com.virtualgiving.controllers;
 
-import com.virtualgiving.dto.LoginRequest;
 import com.virtualgiving.entities.StudentEntity;
 import com.virtualgiving.services.StudentService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    @PostMapping("/register")
-    public StudentEntity registerStudent(@RequestBody StudentEntity student) {
-        return studentService.registerStudent(student);
+    public StudentController(StudentService studentService){
+        this.studentService = studentService;
     }
 
     @GetMapping
@@ -29,30 +24,23 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentEntity> getStudentById(@PathVariable int id) {
-        Optional<StudentEntity> student = studentService.getStudentById(id);
-        return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public StudentEntity getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<StudentEntity> updateStudent(@PathVariable int id, @RequestBody StudentEntity updatedStudent) {
-        StudentEntity student = studentService.updateStudent(id, updatedStudent);
-        return (student != null) ? ResponseEntity.ok(student) : ResponseEntity.notFound().build();
+    @PostMapping
+    public StudentEntity addNewStudent(@RequestBody StudentEntity student) {
+        return studentService.addNewStudent(student);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable int id) {
-        boolean isDeleted = studentService.deleteStudent(id);
-        return isDeleted ? ResponseEntity.ok("Student deleted successfully") : ResponseEntity.notFound().build();
+    @PutMapping("/{id}")
+    public StudentEntity updateStudentById(@PathVariable Long id, @RequestBody StudentEntity updatedStudent) {
+        return studentService.updateStudentById(id, updatedStudent);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<StudentEntity> loginStudent(@RequestBody LoginRequest loginRequest) {
-    String email = loginRequest.getEmail();
-    String password = loginRequest.getPassword();
-
-    StudentEntity student = studentService.loginStudent(email, password);
-    return (student != null) ? ResponseEntity.ok(student) : ResponseEntity.status(401).build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteStudentById(@PathVariable Long id){
+        studentService.deleteStudentById(id);
+        return ResponseEntity.ok("Student deleted successfully");
     }
-
 }

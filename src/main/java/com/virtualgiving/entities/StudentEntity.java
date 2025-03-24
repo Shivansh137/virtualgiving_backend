@@ -6,6 +6,7 @@ import com.virtualgiving.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Student")
+@Table(name = "students")
 public class StudentEntity {
 
     @Id
@@ -32,10 +33,12 @@ public class StudentEntity {
     @Email(message = "Invalid Email format")
     private String email;
 
+    @Column(name = "contact_numbers")
     @ElementCollection
-    private List<String> contact_numbers;
+    private List<String> contactNumbers;
 
-    private String profile_picture;
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
     @NotBlank(message = "Password cannot be blank")
     private String password;
@@ -49,72 +52,8 @@ public class StudentEntity {
     @NotBlank(message = "State cannot be blank")
     private String state;
 
-    @NotBlank(message = "Role is a required field")
+    @NotNull(message = "Role is a required field")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.STUDENT;
 
-    // Getters and Setters
-    public long getUser_id() {
-        return id;
-    }
-
-    public void setUser_id(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getProfile_picture() {
-        return profile_picture;
-    }
-
-    public void setProfile_picture(String profile_picture) {
-        this.profile_picture = profile_picture;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 }

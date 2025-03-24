@@ -16,32 +16,31 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public AdminEntity add(AdminEntity admin) {
+    public AdminEntity addNewAdmin(AdminEntity admin) {
         return adminRepository.save(admin);
     }
 
-    public List<AdminEntity> getAll() {
+    public List<AdminEntity> getAllAdmins() {
         return adminRepository.findAll();
     }
 
-    public AdminEntity getById(Long id) {
+    public AdminEntity getAdminById(Long id) {
         return adminRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public AdminEntity updateById(Long id, AdminEntity updatedAdminEntity) {
+    public AdminEntity updateAdminById(Long id, AdminEntity updatedAdminEntity) {
         AdminEntity AdminEntity = adminRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         AdminEntity.setCity(updatedAdminEntity.getCity());
         AdminEntity.setName(updatedAdminEntity.getName());
         AdminEntity.setState(updatedAdminEntity.getState());
         AdminEntity.setStreet(updatedAdminEntity.getStreet());
-        AdminEntity.setContact_numbers(updatedAdminEntity.getContact_numbers());
-        AdminEntity.setProfile_picture(updatedAdminEntity.getProfile_picture());
+        AdminEntity.setContactNumbers(updatedAdminEntity.getContactNumbers());
+        AdminEntity.setProfilePicture(updatedAdminEntity.getProfilePicture());
         return adminRepository.save(AdminEntity);
     }
 
-    public void delete(Long id) {
+    public void deleteAdminById(Long id) {
         AdminEntity AdminEntity = adminRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         adminRepository.delete(AdminEntity);
     }
-
 }

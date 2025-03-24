@@ -1,64 +1,47 @@
 package com.virtualgiving.services;
 
 import com.virtualgiving.entities.StudentEntity;
+import com.virtualgiving.exceptions.UserNotFoundException;
 import com.virtualgiving.repositories.StudentRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
+    private final StudentRepository studentRepository;
 
-    @Autowired
-    private StudentRepository studentRepository;
+    public StudentService(StudentRepository studentRepository){
+        this.studentRepository = studentRepository;
+    }
 
-    public StudentEntity registerStudent(StudentEntity student) {
+    public StudentEntity addNewStudent(StudentEntity student){
         return studentRepository.save(student);
     }
 
-    public List<StudentEntity> getAllStudents() {
+    public List<StudentEntity> getAllStudents(){
         return studentRepository.findAll();
     }
 
-    public Optional<StudentEntity> getStudentById(int id) {
-        return studentRepository.findById((long) id);
+    public StudentEntity getStudentById(Long id){
+        return studentRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public StudentEntity updateStudent(int id, StudentEntity updatedStudent) {
-        Optional<StudentEntity> existingStudent = studentRepository.findById((long) id);
-        if (existingStudent.isPresent()) {
-            StudentEntity student = existingStudent.get();
-            student.setName(updatedStudent.getName());
-            student.setEmail(updatedStudent.getEmail());
-            student.setContact_numbers(updatedStudent.getContact_numbers());
-            student.setRole(updatedStudent.getRole());
-            student.setProfile_picture(updatedStudent.getProfile_picture());
-            student.setPassword(updatedStudent.getPassword());
-            student.setStreet(updatedStudent.getStreet());
-            student.setCity(updatedStudent.getCity());
-            student.setState(updatedStudent.getState());
-            return studentRepository.save(student);
-        }
-        return null;
+    public StudentEntity updateStudentById(Long id, StudentEntity updatedStudentEntity){
+        StudentEntity studentEntity = studentRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        studentEntity.setCity(updatedStudentEntity.getCity());
+        studentEntity.setName(updatedStudentEntity.getName());
+        studentEntity.setState(updatedStudentEntity.getState());
+        studentEntity.setStreet(updatedStudentEntity.getStreet());
+        studentEntity.setContactNumbers(updatedStudentEntity.getContactNumbers());
+        studentEntity.setProfilePicture(updatedStudentEntity.getProfilePicture());
+        return studentRepository.save(studentEntity);
     }
 
-    public boolean deleteStudent(int id) {
-        if (studentRepository.existsById((long) id)) {
-            studentRepository.deleteById((long) id);
-            return true;
-        }
-        return false;
+    public void deleteStudentById(Long id){
+        StudentEntity studentEntity = studentRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        studentRepository.delete(studentEntity);
     }
 
-    public StudentEntity loginStudent(String email, String password) {
-        List<StudentEntity> students = studentRepository.findAll();
-        for (StudentEntity student : students) {
-            if (student.getEmail().equals(email) && student.getPassword().equals(password)) {
-                return student; // Login successful
-            }
-        }
-        return null; // Login failed
-    }
 }

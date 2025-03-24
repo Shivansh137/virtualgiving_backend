@@ -4,6 +4,7 @@ import com.virtualgiving.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,12 +45,14 @@ public class OrganizationEntity {
     @NotBlank(message = "Password cannot be blank")
     private String password;
 
-    private String profile_picture;
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
-    @NotBlank(message = "Role is a required field")
+    @NotNull(message = "Role is a required field")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.ORGANIZATION;
 
+    @Column(name = "contact_numbers")
     @ElementCollection
-    private List<String> contact_numbers;
+    private List<String> contactNumbers;
 }

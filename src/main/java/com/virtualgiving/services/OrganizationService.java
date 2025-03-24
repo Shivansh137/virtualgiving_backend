@@ -16,30 +16,30 @@ public class OrganizationService {
         this.organizationRepository = organizationRepository;
     }
 
-    public OrganizationEntity add(OrganizationEntity organization){
+    public OrganizationEntity addNewOrganization(OrganizationEntity organization){
         return organizationRepository.save(organization);
     }
 
-    public List<OrganizationEntity> getAll(){
+    public List<OrganizationEntity> getAllOrganizations(){
         return organizationRepository.findAll();
     }
 
-    public OrganizationEntity getById(Long id){
+    public OrganizationEntity getOrganizationById(Long id){
         return organizationRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public OrganizationEntity updateById(Long id, OrganizationEntity updatedOrganizationEntity){
+    public OrganizationEntity updateOrganizationById(Long id, OrganizationEntity updatedOrganizationEntity){
         OrganizationEntity organizationEntity = organizationRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         organizationEntity.setCity(updatedOrganizationEntity.getCity());
         organizationEntity.setName(updatedOrganizationEntity.getName());
         organizationEntity.setState(updatedOrganizationEntity.getState());
         organizationEntity.setStreet(updatedOrganizationEntity.getStreet());
-        organizationEntity.setContact_numbers(updatedOrganizationEntity.getContact_numbers());
-        organizationEntity.setProfile_picture(updatedOrganizationEntity.getProfile_picture());
+        organizationEntity.setContactNumbers(updatedOrganizationEntity.getContactNumbers());
+        organizationEntity.setProfilePicture(updatedOrganizationEntity.getProfilePicture());
         return organizationRepository.save(organizationEntity);
     }
 
-    public void delete(Long id){
+    public void deleteOrganizationById(Long id){
         OrganizationEntity organizationEntity = organizationRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         organizationRepository.delete(organizationEntity);
     }

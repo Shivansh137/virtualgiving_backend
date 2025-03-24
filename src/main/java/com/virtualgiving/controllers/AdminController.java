@@ -19,28 +19,28 @@ public class AdminController {
     }
 
     @GetMapping
-    public List<AdminEntity> getAll(){
-        return adminService.getAll();
+    public List<AdminEntity> getAllAdmins(){
+        return adminService.getAllAdmins();
     }
 
     @GetMapping("/{id}")
-    public AdminEntity getById(@PathVariable Long id){
-        return adminService.getById(id);
+    public AdminEntity getAdminById(@PathVariable Long id){
+        return adminService.getAdminById(id);
     }
 
     @PostMapping
-    public AdminEntity add(@Valid @RequestBody AdminEntity adminEntity){
-        return adminService.add(adminEntity);
+    public AdminEntity addNewAdmin(@Valid @RequestBody AdminEntity adminEntity){
+        return adminService.addNewAdmin(adminEntity);
     }
 
     @PutMapping("/{id}")
-    public AdminEntity update(@PathVariable Long id, @Valid @RequestBody AdminEntity adminEntity){
-        return adminService.updateById(id, adminEntity);
+    public AdminEntity updateAdminById(@PathVariable Long id, @Valid @RequestBody AdminEntity adminEntity){
+        return adminService.updateAdminById(id, adminEntity);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id){
-        adminService.delete(id);
+    public ResponseEntity<String> deleteAdminById(@PathVariable Long id){
+        adminService.deleteAdminById(id);
         return ResponseEntity.ok("Admin deleted successfully");
     }
 
