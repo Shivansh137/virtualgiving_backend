@@ -14,11 +14,12 @@ import java.util.List;
 
 @Service
 public class DonationRequestService {
+
+    @Autowired
     private final DonationRequestRepository donationRequestRepository;
     private final StudentRepository studentRepository;
     private final OrganizationRepository organizationRepository;
 
-    @Autowired
     public DonationRequestService(DonationRequestRepository donationRequestRepository, StudentRepository studentRepository, OrganizationRepository organizationRepository){
         this.donationRequestRepository = donationRequestRepository;
         this.studentRepository = studentRepository;

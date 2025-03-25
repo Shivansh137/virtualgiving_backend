@@ -14,11 +14,12 @@ import java.util.List;
 
 @Service
 public class BankDetailsService {
+
+    @Autowired
     private final BankDetailsRepository bankDetailsRepository;
     private final StudentRepository studentRepository;
     private final OrganizationRepository organizationRepository;
 
-    @Autowired
     public BankDetailsService(BankDetailsRepository bankDetailsRepository, StudentRepository studentRepository, OrganizationRepository organizationRepository){
         this.bankDetailsRepository = bankDetailsRepository;
         this.studentRepository = studentRepository;

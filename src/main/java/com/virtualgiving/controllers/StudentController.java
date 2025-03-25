@@ -14,7 +14,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService){
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStudentById(@PathVariable Long id){
+    public ResponseEntity<String> deleteStudentById(@PathVariable Long id) {
         studentService.deleteStudentById(id);
         return ResponseEntity.ok("Student deleted successfully");
     }
