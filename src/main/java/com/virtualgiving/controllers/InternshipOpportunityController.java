@@ -19,7 +19,7 @@ public class InternshipOpportunityController {
         this.internshipService = internshipService;
     }
 
-    @PostMapping("/{alumniId}")
+    @PostMapping
     public InternshipOpportunityEntity addInternshipOpportunity(
             @RequestBody InternshipOpportunityEntity internship,
             @PathVariable Long alumniId) {
@@ -36,14 +36,14 @@ public class InternshipOpportunityController {
         return internshipService.getInternshipOpportunityById(id);
     }
 
-    @PutMapping("/update-status/{id}")
+    @PutMapping("/{id}")
     public InternshipOpportunityEntity updateInternshipStatus(
             @PathVariable Long id,
             @RequestParam Status status) {
         return internshipService.updateInternshipStatus(id, status);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteInternship(@PathVariable Long id) {
         internshipService.deleteInternshipOpportunity(id);
     }

@@ -14,6 +14,7 @@ public class MentorshipOpportunityController {
 
     @Autowired
     private final MentorshipOpportunityService opportunityService;
+
     public MentorshipOpportunityController(MentorshipOpportunityService opportunityService) {
         this.opportunityService = opportunityService;
     }
@@ -35,21 +36,21 @@ public class MentorshipOpportunityController {
         return opportunityService.getOpportunityById(id);
     }
 
-    @PostMapping("/apply/{opportunityId}/{studentId}")
+    @PostMapping("/{id}")
     public MentorshipOpportunityEntity applyForMentorship(
             @PathVariable Long opportunityId,
             @PathVariable Long studentId) {
         return opportunityService.applyForMentorship(opportunityId, studentId);
     }
 
-    @PutMapping("/update-status/{id}")
+    @PutMapping("/{id}")
     public MentorshipOpportunityEntity updateOpportunityStatus(
             @PathVariable Long id,
             @RequestParam Status status) {
         return opportunityService.updateOpportunityStatus(id, status);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteOpportunity(@PathVariable Long id) {
         opportunityService.deleteOpportunity(id);
     }

@@ -19,19 +19,16 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    // Student applies for an internship
-    @PostMapping("/apply")
+    @PostMapping
     public ApplicationEntity applyForInternship(@Valid @RequestBody ApplicationEntity applicationEntity) {
         return applicationService.applyForInternship(applicationEntity);
     }
 
-    // Get all applications
     @GetMapping
     public List<ApplicationEntity> getAllApplications() {
         return applicationService.getAllApplications();
     }
 
-    // Get a specific application by ID
     @GetMapping("/{id}")
     public ApplicationEntity getApplicationById(@PathVariable Long id) {
         return applicationService.getApplicationById(id);
@@ -45,11 +42,11 @@ public class ApplicationController {
     }
 
     // Alumni approves/rejects an application
-    @PutMapping("/{id}/update-status")
+    @PutMapping("/{id}")
     public ApplicationEntity updateApplicationStatus(
-            @PathVariable Long id,
-            @RequestParam Long alumniId,
-            @RequestParam Status status) {
+        @PathVariable Long id,
+        @RequestParam Long alumniId,
+        @RequestParam Status status) {
         return applicationService.updateApplicationStatus(id, alumniId, status);
     }
 }

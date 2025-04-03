@@ -32,7 +32,7 @@ public class MentorshipRequestController {
         return mentorshipRequestService.addNewMentorshipRequest(mentorshipRequestEntity);
     }
 
-    @PutMapping("/{id}/accept")
+    @PutMapping("/{id}")
     public ResponseEntity<String> acceptMentorshipRequest(@PathVariable Long id, @RequestParam Long alumniId) {
         mentorshipRequestService.acceptMentorshipRequest(id, alumniId);
         return ResponseEntity.ok("Mentorship request accepted successfully");
