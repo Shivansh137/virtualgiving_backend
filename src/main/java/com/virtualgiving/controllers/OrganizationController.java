@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/organizations")
+@CrossOrigin(origins = "http://localhost:5173")
 public class OrganizationController {
     private final OrganizationService organizationService;
 
