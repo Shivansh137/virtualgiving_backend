@@ -56,4 +56,5 @@ public class StudentEntity {
     @Enumerated(EnumType.STRING)
     private Role role = Role.STUDENT;
 
+
 }

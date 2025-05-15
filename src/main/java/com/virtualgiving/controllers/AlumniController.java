@@ -1,5 +1,7 @@
 package com.virtualgiving.controllers;
 
+import com.virtualgiving.dto.LoginRequestDTO;
+import com.virtualgiving.dto.LoginResponseDTO;
 import com.virtualgiving.entities.AlumniEntity;
 import com.virtualgiving.services.AlumniService;
 
@@ -43,5 +45,11 @@ public class AlumniController {
     public ResponseEntity<String> deleteAlumniById(@PathVariable Long id){
         alumniService.deleteAlumniById(id);
         return ResponseEntity.ok("Alumni deleted successfully");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> loginAlumni(@RequestBody LoginRequestDTO request) {
+        LoginResponseDTO response = alumniService.loginAlumni(request);
+        return ResponseEntity.ok(response);
     }
 }
