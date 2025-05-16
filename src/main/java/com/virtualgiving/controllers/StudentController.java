@@ -47,10 +47,5 @@ public class StudentController {
         return ResponseEntity.ok("Student deleted successfully");
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> loginStudent(@RequestBody LoginRequestDTO request) {
-        LoginResponseDTO response = studentService.loginStudent(request);
-        return ResponseEntity.ok(response);
-    }
 }
 
