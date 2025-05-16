@@ -1,7 +1,5 @@
 package com.virtualgiving.controllers;
 
-import com.virtualgiving.dto.LoginRequestDTO;
-import com.virtualgiving.dto.LoginResponseDTO;
 import com.virtualgiving.entities.StudentEntity;
 import com.virtualgiving.services.StudentService;
 

@@ -1,4 +1,4 @@
-package com.virtualgiving.security;
+package com.virtualgiving.config;
 
 import com.virtualgiving.utils.JwtFilter;
 import org.springframework.context.annotation.Bean;

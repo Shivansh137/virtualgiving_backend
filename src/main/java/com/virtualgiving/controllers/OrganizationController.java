@@ -1,7 +1,5 @@
 package com.virtualgiving.controllers;
 
-import com.virtualgiving.dto.LoginRequestDTO;
-import com.virtualgiving.dto.LoginResponseDTO;
 import com.virtualgiving.entities.OrganizationEntity;
 import com.virtualgiving.services.OrganizationService;
 
@@ -45,12 +43,6 @@ public class OrganizationController {
     public ResponseEntity<String> deleteOrganizationById(@PathVariable Long id){
         organizationService.deleteOrganizationById(id);
         return ResponseEntity.ok("Organization deleted successfully");
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> loginOrganization(@RequestBody LoginRequestDTO request) {
-        LoginResponseDTO response = organizationService.loginOrganization(request);
-        return ResponseEntity.ok(response);
     }
 
 }
